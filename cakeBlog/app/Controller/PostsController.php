@@ -63,4 +63,15 @@ class PostsController extends AppController {
             return $this->redirect(array('action' => 'index'));
         }
     }
+
+    public function add_comment(){
+        if ($this->request->is('post')){
+            $this->Post->create();
+            if($this->Post->save($this->request->data)){
+                $this->Session->setFlash(__('Your comment has been added.'));
+                return $this->redirect(array('action' => 'view'));
+            }
+            $this->Session->setFlash(__('Unable to add your comment'));
+        }
+    }
 }

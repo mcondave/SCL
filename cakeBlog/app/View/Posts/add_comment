@@ -1,0 +1,8 @@
+<!-- File: /app/View/Posts/add_comment.ctp -->
+
+<h1>Add A Comment</h1>
+<?php
+	echo $this->Form->create('comment');
+	echo $this->Form->input('comment');
+	echo $this->Form->end('Post comment');
+?>
