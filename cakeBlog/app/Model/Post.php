@@ -5,6 +5,6 @@ class Post extends AppModel {
 	var $hasMany = array('Comment'=>array('className'=>'Comment'));
 
 	public function isOwnedBy($post, $user) {
-		return $this->field('id', array('id' => $post, 'user_id' => $user)) === $post;
+	    return $this->field('id', array('id' => $post, 'user_id' => $user)) === $post;
 	}
 }

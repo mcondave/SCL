@@ -9,4 +9,3 @@
 
 <?php echo $this->Html->link('Add Comment', array('controller' => 'comments', 'action' => 'add')); ?>
 
-

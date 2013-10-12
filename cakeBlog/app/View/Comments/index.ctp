@@ -18,8 +18,10 @@
 		<td><?php echo h($comment['Comment']['created']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $comment['Comment']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $comment['Comment']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $comment['Comment']['id']), null, __('Are you sure you want to delete # %s?', $comment['Comment']['id'])); ?>
+			<?php if ($current_user['id'] == $comment['Comment']['user_id'] || $current_user['role'] === 'admin' ): ?>
+				<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $comment['Comment']['id'])); ?>
+				<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $comment['Comment']['id']), null, __('Are you sure you want to delete # %s?', $comment['Comment']['id'])); ?>
+			<?php endif; ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

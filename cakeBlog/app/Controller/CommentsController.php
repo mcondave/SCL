@@ -22,6 +22,7 @@ class CommentsController extends AppController {
  */
 	public function index() {
 		$this->Comment->recursive = 0;
+		$this->Comment->find('all');
 		$this->set('comments', $this->Paginator->paginate());
 	}
 
@@ -47,7 +48,7 @@ class CommentsController extends AppController {
  */
 	public function add() {
 		if ($this->request->is('post')) {
-			$this->Comment->create();
+			$this->request->data['Comment']['user_id'] = $this->Auth->user('id');
 			if ($this->Comment->save($this->request->data)) {
 				$this->Session->setFlash(__('The comment has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -104,4 +105,12 @@ class CommentsController extends AppController {
 			$this->Session->setFlash(__('The comment could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
-	}}
+	}
+
+	public function isAuthorized($user) {
+       	// All registered users can add posts
+       	if ($this->action === 'add') {
+           	return true;
+        }
+    }
+}
